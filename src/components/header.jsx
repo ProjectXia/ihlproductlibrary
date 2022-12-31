@@ -1,11 +1,22 @@
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import Swiper from "react-native-swiper";
 import { Ionicons } from "@expo/vector-icons";
+import ModalListing from "./modelforlisting";
+import { functions } from "firebase";
+import { useState } from "react";
 
 const sliderHeight = 200;
-const slideHight = 200;
+const slideHight = 233;
 
-function Header() {
+function Header({ onAddPress }) {
+  const [showAppbars, setShowAppBars] = useState(false);
+
   const famousTowel = [
     {
       title: "Brockliee sandwitch",
@@ -20,43 +31,53 @@ function Header() {
       towelImage: require("../../assets/header3.jpg"),
     },
   ];
+  function toggleAppBar() {
+    setShowAppBars(!showAppbars);
+  }
 
-  return (
-    <View style={styles.container}>
-      <View
+  const appbar = () => {
+    <View
+      style={{
+        height: 63,
+        backgroundColor: "#227C70",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        overflow: "scroll",
+      }}
+    >
+      <Text
         style={{
-          height: 63,
-          backgroundColor: "#1C315E",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingHorizontal: 20,
+          color: "white",
+          fontSize: 24,
+          fontWeight: "600",
         }}
       >
-        <Text
-          style={{
-            color: "#E6E2C3",
-            fontSize: 24,
-            fontWeight: "600",
-          }}
-        >
-          Product Listing
-        </Text>
+        Product Listing
+      </Text>
+      <ImageBackground
+        style={{
+          width: 50,
+          height: 50,
+          backgroundColor: "#E6E2C3",
+          borderRadius: 30,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <TouchableOpacity onPress={onAddPress}>
+          <Ionicons name="add" size={40} color={"#1C315E"} />
+        </TouchableOpacity>
+      </ImageBackground>
+    </View>;
+  };
+  return (
+    <View style={styles.container}>
+      {/* {setShowAppBars ? <appbar /> : <View></View>} */}
+      <Swiper style={styles.wrapper} showsButtons={false} autoplay>
         <ImageBackground
-          style={{
-            width: 50,
-            height: 50,
-            backgroundColor: "#E6E2C3",
-            borderRadius: 30,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Ionicons name="settings" size={30} color={"gray"} />
-        </ImageBackground>
-      </View>
-      <Swiper style={styles.wrapper} showsButtons={true} autoplay>
-        <ImageBackground
+          resizeMode="stretch"
           source={famousTowel[0].towelImage}
           style={styles.slide1}
         >
@@ -64,6 +85,7 @@ function Header() {
         </ImageBackground>
 
         <ImageBackground
+          resizeMode="stretch"
           source={famousTowel[1].towelImage}
           style={styles.slide2}
         >
@@ -71,6 +93,7 @@ function Header() {
         </ImageBackground>
 
         <ImageBackground
+          resizeMode="stretch"
           source={famousTowel[2].towelImage}
           style={styles.slide3}
         >
@@ -82,7 +105,7 @@ function Header() {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 0.35,
+    height: "30%",
     backgroundColor: "#FFFFFF",
   },
   wrapper: {},
@@ -90,19 +113,16 @@ const styles = StyleSheet.create({
     height: slideHight,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#227C70",
   },
   slide2: {
     height: slideHight,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#227C70",
   },
   slide3: {
     height: slideHight,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#227C70",
   },
   text: {
     color: "#fff",

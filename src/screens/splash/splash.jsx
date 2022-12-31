@@ -1,11 +1,22 @@
 import { useEffect } from "react";
 import { View, StyleSheet, ImageBackground } from "react-native";
 import { Loading } from "../../components/loading";
+import { getUserLoggedInStatus } from "../../services/storageService";
 
 function Splash({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace("Dashboard");
+      getUserLoggedInStatus()
+        .then((response) => {
+          if (response === "true") {
+            navigation.replace("Dashboard");
+          } else {
+            navigation.replace("Login");
+          }
+        })
+        .catch((error) => {
+          ShowToast("error", error.message);
+        });
     }, 3000);
   }, []);
 

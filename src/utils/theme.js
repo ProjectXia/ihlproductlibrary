@@ -12,9 +12,9 @@ const colors = {
   bgColor: "#F9F9F9",
 };
 
-const modifiers = {
-  containerPadding: 10,
-  itemMargin: 10,
-};
+// const modifierss = {
+//   containerPadding: 10,
+//   itemMargin: 10,
+// };
 
-export { colors, modifiers };
+export { colors };

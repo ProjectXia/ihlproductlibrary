@@ -5,7 +5,7 @@ import { Camera, CameraType } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
 
 function CustomCamera({ show, onClose, onPictureTaken }) {
-  const [type, setType] = useState(CameraType.front);
+  const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
   // ref for camera
@@ -41,7 +41,10 @@ function CustomCamera({ show, onClose, onPictureTaken }) {
         animationIn={"slideInUp"}
         animationOut={"slideOutDown"}
         isVisible={show}
-        style={{ justifyContent: "flex-end", flex: 1 }}
+        style={{
+          justifyContent: "flex-end",
+          flex: 0.6,
+        }}
       >
         <Camera style={styles.camera} type={type} ref={cameraRef}>
           <View style={styles.topButtonView}>
