@@ -10,13 +10,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { GalleryCard } from "../../components/gallerycard";
-import { TopHeader } from "../../components/topheader";
 import { firebase } from "../../services/firebaseConfig";
 import { TextInput, Button, Appbar } from "react-native-paper";
 //import ImageViewer which will help us to zoom Image
-import ImageViewer from "react-native-image-zoom-viewer";
-import { ImageView } from "../../components/imageView";
-import Modal from "react-native-modal";
+import MenuTop from "../../components/menutop";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { clearUserSession } from "../../services/storageService";
 
 function Gallery({ navigation, route }) {
   const { itemId, itemName } = route.params;
@@ -25,12 +24,22 @@ function Gallery({ navigation, route }) {
   const [showLoading, setShowLoading] = useState(false);
   const [imageData, setImageData] = useState(new Map());
   const [isModalVisible, setModalVisible] = useState(false);
+  const [emailval, setEmailval] = useState();
 
   var images;
+
+  const getEmail = async () => {
+    const val = await AsyncStorage.getItem("user_email");
+    if (val !== null) {
+      setEmailval(val);
+      console.log(emailval);
+    }
+  };
 
   // when this component/screen will load infront of user
   useEffect(() => {
     getAllProduct();
+    getEmail();
   }, []);
 
   const toggleModall = () => {
@@ -44,6 +53,12 @@ function Gallery({ navigation, route }) {
       <GalleryCard
         imgURI={{ uri: listing.imageUrl }}
         title={listing.category}
+        onButtonPress={() => {
+          navigation.navigate("ProductDetail", {
+            dataProduct: listing,
+            img: listing.imageUrl,
+          });
+        }}
         imageClick={() => {
           navigation.navigate("ImageView", { image: listing.imageUrl });
           // images = [{ url: listing.imageUrl }];
@@ -70,7 +85,10 @@ function Gallery({ navigation, route }) {
         setShowLoading(false);
       });
   };
-
+  const signOutME = () => {
+    clearUserSession;
+    navigation.replace("Login");
+  };
   const headerText = () => {
     return { itemName } + "Gallery";
   };
@@ -80,7 +98,15 @@ function Gallery({ navigation, route }) {
       <Appbar.Header mode="small" style={{ backgroundColor: "#F1F6F5" }}>
         {/* <Appbar.BackAction onPress={() => {}} /> */}
         <Appbar.Content title={itemName + " Gallery"} />
-        <Appbar.Action icon="dots-vertical" onPress={() => {}} />
+        <MenuTop
+          viewadd={<Appbar.Action icon="dots-vertical" />}
+          signOUT={signOutME}
+          newAdd={() => {
+            navigation.navigate("NewProduct", {
+              itemId: itemId,
+            });
+          }}
+        />
       </Appbar.Header>
     );
   };
@@ -120,9 +146,27 @@ function Gallery({ navigation, route }) {
             >
               No Product listing found !
             </Text>
-            <Button mode="outlined" onPress={() => {}}>
-              Add New Item
-            </Button>
+            {emailval !== "admin@gmail.com" ? (
+              <Button
+                mode="outlined"
+                onPress={() => {
+                  getAllProduct();
+                }}
+              >
+                Reload...
+              </Button>
+            ) : (
+              <Button
+                mode="outlined"
+                onPress={() => {
+                  navigation.navigate("NewProduct", {
+                    itemId: itemId,
+                  });
+                }}
+              >
+                Add New Item
+              </Button>
+            )}
           </View>
         }
         refreshing={showLoading}
@@ -130,7 +174,7 @@ function Gallery({ navigation, route }) {
       />
 
       {/* </ScrollView> */}
-      <Modal
+      {/* <Modal
         animationIn={"slideInRight"}
         animationOut={"slideOutDown"}
         animationOutTiming={1500}
@@ -169,7 +213,7 @@ function Gallery({ navigation, route }) {
             <ImageViewer imageUrls={images} renderIndicator={() => null} />
           </View>
         </View>
-      </Modal>
+      </Modal> */}
     </View>
   );
 }

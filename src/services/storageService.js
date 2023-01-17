@@ -4,11 +4,11 @@ import { ShowToast } from "../utils/help";
 /** if i were to do the same function in async await mode
  *
  */
-
-async function storeUserSession(uid, sessionState) {
+async function storeUserSession(uid, sessionState, uemail) {
   try {
     await AsyncStorage.setItem("user_uid", uid);
     await AsyncStorage.setItem("user_is_logged_in", sessionState);
+    await AsyncStorage.setItem("user_email", uemail);
   } catch (error) {
     ShowToast("error", error.message);
   }

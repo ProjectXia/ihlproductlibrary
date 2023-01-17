@@ -19,15 +19,15 @@ function Header({ onAddPress }) {
 
   const famousTowel = [
     {
-      title: "Brockliee sandwitch",
+      title: "",
       towelImage: require("../../assets/header.png"),
     },
     {
-      title: "Mash Potatoes",
+      title: "",
       towelImage: require("../../assets/header2.jpg"),
     },
     {
-      title: "Peas and Carrots",
+      title: "",
       towelImage: require("../../assets/header3.jpg"),
     },
   ];

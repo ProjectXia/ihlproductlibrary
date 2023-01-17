@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { CustomCamera } from "../../components/customecamera";
 import * as ImagePicker from "expo-image-picker";
 import { firebase } from "../../services/firebaseConfig";
+import { clearUserSession } from "../../services/storageService";
 import {
   getARandomIds,
   getARandomImageName,
@@ -25,6 +26,7 @@ import {
 } from "../../utils/help";
 import { makeBlob } from "../../services/uploadImage";
 import { TextInput, Button, Appbar } from "react-native-paper";
+import MenuTop from "../../components/menutop";
 
 function DashBoard({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -228,12 +230,21 @@ function DashBoard({ navigation }) {
       />
     );
   };
+
+  const signOutME = () => {
+    clearUserSession;
+    navigation.replace("Login");
+  };
+
   const MyHeader = () => {
     return (
       <Appbar.Header mode="small" style={{ backgroundColor: "#F1F6F5" }}>
-        {/* <Appbar.BackAction onPress={() => {}} /> */}
         <Appbar.Content title="Product Listing" />
-        <Appbar.Action icon="dots-vertical" onPress={() => {}} />
+        <MenuTop
+          viewadd={<Appbar.Action icon="dots-vertical" />}
+          newAdd={toggleModall}
+          signOUT={signOutME}
+        />
       </Appbar.Header>
     );
   };

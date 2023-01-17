@@ -44,7 +44,7 @@ function SignIN({ navigation }) {
 
         const userUid = authResponse.user.uid;
 
-        storeUserSession(userUid, "true");
+        storeUserSession(userUid, "true", email);
 
         navigation.replace("Dashboard");
         ShowToast("success", "you are the authentic useer CONGO", "top");
