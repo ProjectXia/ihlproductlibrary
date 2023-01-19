@@ -57,7 +57,7 @@ function SignIN({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#F1F6F5" }}>
       <View style={styles.formCon}>
         <HeaderLogin title={"Login"} />
 
@@ -69,7 +69,7 @@ function SignIN({ navigation }) {
             alignSelf: "center",
           }}
           onPress={() => {
-            alert("camera click");
+            // alert("camera click");
           }}
         />
 
@@ -88,12 +88,12 @@ function SignIN({ navigation }) {
           onTextChange={setPassword}
         />
         <View style={styles.textbtnCon}>
-          <TextButton
+          {/* <TextButton
             title="Forgot your password?"
             onPressChange={() => {
               navigation.navigate("forgot");
             }}
-          />
+          /> */}
         </View>
         <BButton title="Sign IN" onPressChange={onSignin} cwidth={"95%"} />
         <View style={styles.gotoSignupStyle}>

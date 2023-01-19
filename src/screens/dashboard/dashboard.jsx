@@ -27,6 +27,8 @@ import {
 import { makeBlob } from "../../services/uploadImage";
 import { TextInput, Button, Appbar } from "react-native-paper";
 import MenuTop from "../../components/menutop";
+import AwesomeAlert from "react-native-awesome-alerts";
+import LottieView from "lottie-react-native";
 
 function DashBoard({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -39,6 +41,10 @@ function DashBoard({ navigation }) {
   const [likesCount, setLikesCount] = useState(0);
   const [likedImage, setLikedImage] = useState(false);
   const [likedIcon, setLikedIcon] = useState("heart-sharp");
+  const [showAlert, setShowAlert] = useState(false);
+  const [listID, setListID] = useState();
+  const [imgID, setImgID] = useState();
+  const [lName, setLName] = useState();
 
   // when this component/screen will load infront of user
   useEffect(() => {
@@ -169,42 +175,16 @@ function DashBoard({ navigation }) {
           borderColor: "#227C70",
         }}
         labelStyle={{ color: "#227C70" }}
+        onLongPress={() => {
+          // onListingLongPress(listId, listing.imageName);
+          setListID(listId);
+          setImgID(listing.imageName);
+          setLName(listing.name);
+          setShowAlert(true);
+        }}
       >
         {listing.name}
       </Button>
-      // <TouchableOpacity
-      //   onLongPress={() => {}}
-      //   onPress={() => {
-      //     navigation.navigate("Gallery", {
-      //       itemId: listId,
-      //       itemName: listing.name,
-      //     });
-      //   }}
-      // >
-      //   <ImageBackground
-      //     style={{
-      //       // width: "auto",
-      //       height: 50,
-      //       paddingHorizontal: 10,
-      //       margin: 5,
-      //       backgroundColor: "#439A97",
-      //       borderRadius: 30,
-      //       justifyContent: "center",
-      //       alignItems: "center",
-      //     }}
-      //   >
-      //     <Text
-      //       style={{
-      //         color: "white",
-      //         fontSize: 18,
-      //         fontWeight: "600",
-      //         flexWrap: "wrap",
-      //       }}
-      //     >
-      //       {listing.name}
-      //     </Text>
-      //   </ImageBackground>
-      // </TouchableOpacity>
     );
   };
 
@@ -231,6 +211,29 @@ function DashBoard({ navigation }) {
     );
   };
 
+  const onListingLongPress = (recipyId, imageId) => {
+    const userStorageRef = firebase.storage().ref("listing/");
+    userStorageRef
+      .child(imageId)
+      .delete()
+      .then((delImage) => {
+        firebase
+          .firestore()
+          .collection("listing")
+          .doc(recipyId)
+          .delete()
+          .then((response) => {
+            ShowToast("success", "your recipy got deleted");
+          })
+          .catch((error) => {
+            ShowToast("error", error.message);
+          });
+      })
+      .catch(() => {
+        ShowToast("error", error.message);
+      });
+  };
+
   const signOutME = () => {
     clearUserSession;
     navigation.replace("Login");
@@ -253,6 +256,27 @@ function DashBoard({ navigation }) {
     <View
       style={{ flex: 1, backgroundColor: "white", flexDirection: "column" }}
     >
+      <AwesomeAlert
+        show={showAlert}
+        showProgress={false}
+        title="Remove Listing"
+        message={"Do you wants to delete the '" + lName + "' listing"}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="No, cancel"
+        confirmText="Yes, delete it"
+        confirmButtonColor="#DD6B55"
+        onCancelPressed={() => {
+          setShowAlert(false);
+        }}
+        onConfirmPressed={() => {
+          onListingLongPress(listID, imgID);
+          setShowAlert(false);
+          getAllListing();
+        }}
+      />
       <MyHeader />
       <Header onAddPress={toggleModall} />
       <View
@@ -360,7 +384,7 @@ function DashBoard({ navigation }) {
             >
               <View style={styles.pickImgCircle}>
                 <Image
-                  source={{ uri: imageFromPicker || imageFromCamera }}
+                  source={{ uri: imageFromPicker || imageFromCamera || null }}
                   style={{ width: 150, height: 150, borderRadius: 15 }}
                   resizeMode={"contain"}
                 />
@@ -435,6 +459,13 @@ function DashBoard({ navigation }) {
             <BButton title="Cancel" onPressChange={toggleModall} />
           </View>
         </View>
+        {showLoading && (
+          <LottieView
+            source={require("../../../assets/animations/photos-lottie.json")}
+            autoPlay
+            loop
+          />
+        )}
       </Modal>
       <CustomCamera
         show={isCameraShown}

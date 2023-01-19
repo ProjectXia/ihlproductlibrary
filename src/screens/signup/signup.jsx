@@ -54,7 +54,7 @@ function SignUP({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#F1F6F5" }}>
       <View style={styles.formCon}>
         <View style={{ alignSelf: "flex-start" }}>
           <HeaderLogin title={"Sign Up"} />
@@ -68,7 +68,7 @@ function SignUP({ navigation }) {
             alignSelf: "center",
           }}
           onPress={() => {
-            alert("camera click");
+            // alert("camera click");
           }}
         />
         <InputBox

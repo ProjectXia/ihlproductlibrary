@@ -11,6 +11,7 @@ import { Gallery } from "../screens/gallery/gallery";
 import { NewProduct } from "../screens/product/newproduct";
 import { ImageView } from "../components/imageView";
 import { ProductDetail } from "../screens/productdetail/productdetail";
+import { Settings } from "../screens/setting/setting";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ function AppNavigation() {
         <Stack.Screen name="Gallery" component={Gallery} />
         <Stack.Screen name="NewProduct" component={NewProduct} />
         <Stack.Screen name="ImageView" component={ImageView} />
+        <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
       </Stack.Navigator>
     </NavigationContainer>
