@@ -108,6 +108,7 @@ function AboutUs({ navigation }) {
                 fontSize: 28,
                 fontWeight: "500",
                 alignSelf: "center",
+                color: "gray",
               }}
             >
               eople
@@ -129,6 +130,7 @@ function AboutUs({ navigation }) {
                 fontSize: 28,
                 fontWeight: "500",
                 alignSelf: "center",
+                color: "gray",
               }}
             >
               espect
@@ -150,6 +152,7 @@ function AboutUs({ navigation }) {
                 fontSize: 28,
                 fontWeight: "500",
                 alignSelf: "center",
+                color: "gray",
               }}
             >
               ntegrity
@@ -171,6 +174,7 @@ function AboutUs({ navigation }) {
                 fontSize: 28,
                 fontWeight: "500",
                 alignSelf: "center",
+                color: "gray",
               }}
             >
               iversity
@@ -192,6 +196,7 @@ function AboutUs({ navigation }) {
                 fontSize: 28,
                 fontWeight: "500",
                 alignSelf: "center",
+                color: "gray",
               }}
             >
               xcellence
