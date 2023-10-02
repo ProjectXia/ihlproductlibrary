@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ihlproductlibrary",
+    "name": "Indus Product Library",
     "slug": "ihlproductlibrary",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,13 +20,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/adaptive-icon.png"
       },
       "package": "com.projectxia.ihlproductlibrary"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "89d19fcc-f26b-4d56-8fa7-35cb7195c311"
+      }
     }
   }
 }

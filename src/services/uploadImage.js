@@ -3,7 +3,7 @@ import { firebase } from "./firebaseConfig";
 function uploadImage(imgUri, docId) {
   makeBlob(imgUri)
     .then((imageBlob) => {
-      const userStorageRef = firebase.storage().ref("listing/");
+      const userStorageRef = firebase.storage().ref("profiles/");
       userStorageRef
         .child(docId)
         .put(imageBlob)

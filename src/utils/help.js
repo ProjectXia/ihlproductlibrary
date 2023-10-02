@@ -1,7 +1,7 @@
 import Toast from "react-native-toast-message";
 import LottieView from "lottie-react-native";
 
-function ShowToast(toastType, toastMessage, toastPosition = "bottom") {
+function ShowToast(toastType, toastMessage, toastPosition = "top") {
   Toast.show({
     type: toastType,
     text1: "Hi",

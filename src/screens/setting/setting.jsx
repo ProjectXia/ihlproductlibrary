@@ -8,7 +8,7 @@ function Settings({ navigation }) {
 
   const attemptToLogout = () => {
     clearUserSession();
-    navigation.replace("Login");
+    navigation.replace("Splash");
   };
 
   const openCalendar = () => {

@@ -235,10 +235,15 @@ function DashBoard({ navigation }) {
   };
 
   const signOutME = () => {
-    clearUserSession;
-    navigation.replace("Login");
+    clearUserSession("", "false");
+    navigation.replace("Splash");
   };
-
+  const aboutME = () => {
+    navigation.navigate("Aboutus");
+  };
+  const contactME = () => {
+    navigation.navigate("Contactus");
+  };
   const MyHeader = () => {
     return (
       <Appbar.Header mode="small" style={{ backgroundColor: "#F1F6F5" }}>
@@ -247,6 +252,8 @@ function DashBoard({ navigation }) {
           viewadd={<Appbar.Action icon="dots-vertical" />}
           newAdd={toggleModall}
           signOUT={signOutME}
+          aboutus={aboutME}
+          contactus={contactME}
         />
       </Appbar.Header>
     );

@@ -12,6 +12,8 @@ import { NewProduct } from "../screens/product/newproduct";
 import { ImageView } from "../components/imageView";
 import { ProductDetail } from "../screens/productdetail/productdetail";
 import { Settings } from "../screens/setting/setting";
+import { AboutUs } from "../screens/aboutus/aboutus";
+import { ContactUs } from "../screens/contactus/contactus";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +30,8 @@ function AppNavigation() {
         <Stack.Screen name="ImageView" component={ImageView} />
         <Stack.Screen name="Setting" component={Settings} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
+        <Stack.Screen name="Aboutus" component={AboutUs} />
+        <Stack.Screen name="Contactus" component={ContactUs} />
       </Stack.Navigator>
     </NavigationContainer>
   );

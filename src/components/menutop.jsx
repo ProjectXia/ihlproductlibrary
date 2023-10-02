@@ -10,7 +10,13 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
-export default function MenuTop({ viewadd, newAdd, signOUT }) {
+export default function MenuTop({
+  viewadd,
+  newAdd,
+  signOUT,
+  aboutus,
+  contactus,
+}) {
   const [emailval, setEmailval] = useState();
 
   const getEmail = async () => {
@@ -31,7 +37,7 @@ export default function MenuTop({ viewadd, newAdd, signOUT }) {
         {emailval !== "admin@gmail.com" ? null : (
           <MenuOption
             onSelect={newAdd}
-            text="Add New"
+            text="+ Add New"
             style={{ paddingVertical: 10, paddingHorizontal: 10 }}
           />
         )}
@@ -39,8 +45,24 @@ export default function MenuTop({ viewadd, newAdd, signOUT }) {
           style={{ backgroundColor: "gray", height: 1, width: "100%" }}
         ></View>
         <MenuOption
+          onSelect={aboutus}
+          text="About us"
+          style={{ paddingVertical: 10, paddingHorizontal: 10 }}
+        />
+        <View
+          style={{ backgroundColor: "gray", height: 1, width: "100%" }}
+        ></View>
+        <MenuOption
+          onSelect={contactus}
+          text="Contact us"
+          style={{ paddingVertical: 10, paddingHorizontal: 10 }}
+        />
+        <View
+          style={{ backgroundColor: "gray", height: 1, width: "100%" }}
+        ></View>
+        <MenuOption
           onSelect={signOUT}
-          text="Sign Out"
+          text="Sign out"
           style={{ paddingVertical: 10, paddingHorizontal: 10 }}
         />
       </MenuOptions>

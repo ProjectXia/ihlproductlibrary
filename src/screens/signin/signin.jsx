@@ -70,9 +70,10 @@ function SignIN({ navigation }) {
           }}
           onPress={() => {
             // alert("camera click");
+            ShowToast("success", "you are the authentic useer CONGO", "top");
           }}
         />
-
+        <ShowToast />
         <InputBox
           placeholder={"Email"}
           iconName={"mail-outline"}
@@ -112,7 +113,6 @@ function SignIN({ navigation }) {
           loop
         />
       )}
-      <ShowToast />
     </View>
   );
 }

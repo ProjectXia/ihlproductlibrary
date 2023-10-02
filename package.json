@@ -13,6 +13,8 @@
     "@react-navigation/bottom-tabs": "^6.5.2",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.7",
+    "@realm/react": "^0.4.3",
+    "eas-cli": "^3.17.0",
     "expo": "~47.0.9",
     "expo-camera": "^13.1.0",
     "expo-image-picker": "^14.0.2",
@@ -33,7 +35,8 @@
     "react-native-shadow-2": "^7.0.6",
     "react-native-svg": "^13.6.0",
     "react-native-swiper": "^1.6.0",
-    "react-native-toast-message": "^2.1.5"
+    "react-native-toast-message": "^2.1.5",
+    "realm": "^11.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

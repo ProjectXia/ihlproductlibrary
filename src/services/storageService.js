@@ -22,10 +22,11 @@ function getUserLoggedInStatus() {
   return AsyncStorage.getItem("user_is_logged_in");
 }
 
-async function clearUserSession() {
+async function clearUserSession(uid, sessionState) {
   try {
-    await AsyncStorage.setItem("user_uid", "");
-    await AsyncStorage.setItem("user_is_logged_in", "false");
+    await AsyncStorage.setItem("user_uid", uid);
+    await AsyncStorage.setItem("user_is_logged_in", sessionState);
+    console.log("session cleared!");
   } catch (error) {
     ShowToast("error", error.message);
   }
