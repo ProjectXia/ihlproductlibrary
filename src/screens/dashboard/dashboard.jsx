@@ -338,9 +338,9 @@ function DashBoard({ navigation }) {
             >
               No listing found !
             </Text>
-            <Button mode="outlined" onPress={() => {}}>
+            {/* <Button mode="outlined" onPress={() => {}}>
               Add New Item
-            </Button>
+            </Button> */}
           </View>
         }
         refreshing={showLoading}
