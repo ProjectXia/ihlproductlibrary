@@ -24,11 +24,19 @@ function Header({ onAddPress }) {
     },
     {
       title: "",
-      towelImage: require("../../assets/header2.jpg"),
+      towelImage: require("../../assets/header4.png"),
     },
     {
       title: "",
-      towelImage: require("../../assets/header3.jpg"),
+      towelImage: require("../../assets/header5.png"),
+    },
+    {
+      title: "",
+      towelImage: require("../../assets/header6.png"),
+    },
+    {
+      title: "",
+      towelImage: require("../../assets/header7.png"),
     },
   ];
   function toggleAppBar() {
@@ -95,6 +103,20 @@ function Header({ onAddPress }) {
         <ImageBackground
           resizeMode="stretch"
           source={famousTowel[2].towelImage}
+          style={styles.slide3}
+        >
+          <Text style={styles.text}>{famousTowel[2].title}</Text>
+        </ImageBackground>
+        <ImageBackground
+          resizeMode="stretch"
+          source={famousTowel[3].towelImage}
+          style={styles.slide3}
+        >
+          <Text style={styles.text}>{famousTowel[2].title}</Text>
+        </ImageBackground>
+        <ImageBackground
+          resizeMode="stretch"
+          source={famousTowel[4].towelImage}
           style={styles.slide3}
         >
           <Text style={styles.text}>{famousTowel[2].title}</Text>
