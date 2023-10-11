@@ -21,6 +21,7 @@ import {
   getARandomImageName,
   ShowToast,
 } from "../../utils/help";
+import LottieView from "lottie-react-native";
 
 function NewProduct({ navigation, route }) {
   const { itemId } = route.params;
@@ -33,7 +34,7 @@ function NewProduct({ navigation, route }) {
   const [textCat, setTextCat] = React.useState("Bath Towel");
   const [textRef, setTextRef] = React.useState("");
   const [textRemarks, setTextRemarks] = React.useState("...");
-  const [showLoading, setShowLoading] = React.useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const [isCameraShown, setIsCameraShown] = useState(false);
   const [imageFromCamera, setImageFromCamera] = useState("");
   const [imageFromPicker, setImageFromPicker] = useState("");
@@ -41,6 +42,7 @@ function NewProduct({ navigation, route }) {
 
   const saveListing = (imgName, imageUrlOnServer) => {
     const docId = getARandomIds();
+    setShowLoading(true);
     firebase
       .firestore()
       .collection("product")
@@ -62,6 +64,7 @@ function NewProduct({ navigation, route }) {
         console.log("Saved Product Successfully");
         // toggleModall();
         setShowLoading(false);
+        navigation.goBack();
       })
       .catch((error) => {
         console.log("error: " + error);
@@ -159,9 +162,11 @@ function NewProduct({ navigation, route }) {
           buttonColor="white"
           loading={showLoading}
           onPress={() => {
+            setShowLoading(true);
             saveListingImage();
             setShowLoading(false);
           }}
+          disabled={showLoading}
         >
           Save
         </Button>
@@ -414,6 +419,13 @@ function NewProduct({ navigation, route }) {
           setImageFromCamera(response.uri);
         }}
       />
+      {showLoading && (
+        <LottieView
+          source={require("../../../assets/animations/photos-lottie.json")}
+          autoPlay
+          loop
+        />
+      )}
     </View>
   );
 }
